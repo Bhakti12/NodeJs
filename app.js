@@ -1,22 +1,24 @@
-const http = require('http');
-const express = require('express');
+const path = require('path');
 
-///with routes
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const errorController = require('./controllers/error');
+
 const app = express();
 
-app.use('/',(req,res,next)=>{//default path
-    console.log('Always runs')
-    next();
-});
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-app.use('/register',(req,res,next)=>{
-    console.log('another Middleware');
-    res.send('<h1>Register</h1>');
-});
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use('/',(req,res,next)=>{//default path
-    console.log('Middleware')
-    res.send('<h1>Express</h1>');
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
+
+app.use(errorController.get404);
 
 app.listen(3000);
