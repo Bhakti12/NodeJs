@@ -1,0 +1,26 @@
+    <body>
+      <main>
+                <% if (emp.length > 0) { %>
+                    <div class="grid">
+                        <% for (let employee of emp) { %>
+                            <article class="card product-item">
+                                <h2>
+                                    <%= employee.firstName %>
+                                    <%= employee.lastName %>
+                                    <%= employee.emailId %>
+                                    <%= employee.phoneNumber %>
+                                </h2>
+                                <div class="card__actions">
+                                    <a href="/edit-employee/<%= employee.id %>?edit=true" class="btn">Edit</a>
+                                    <form action="/delete-product" method="POST">
+                                        <input type="hidden" value="<%= employee.id %>" name="empId">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No employee Found!!</h1>
+                        <% } %>
+            </main>

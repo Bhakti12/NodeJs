@@ -9,19 +9,13 @@ const employee = sequelize.define('employee',{
         autoIncrement:true,
         primaryKey:true
     },
-    firstName:{
-        type:Sequelize.STRING
-    },
-    lastName:{
-        type:Sequelize.STRING
-    },
+    firstName:Sequelize.STRING,
+    lastName:Sequelize.STRING,
     emailId:{
         type:Sequelize.STRING,
         unique:true
     },
-    phoneNumber:{
-        type:Sequelize.NUMBER
-    }
+    phoneNumber:Sequelize.INTEGER
 });
 
 module.exports = employee;

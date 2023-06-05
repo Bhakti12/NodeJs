@@ -1,0 +1,25 @@
+<body>
+   <main>
+        <form class="form" action="/<% if (editing) { %>EditEmployee<% } else { %>add-employee<% } %>" method="POST">
+            <div class="form-control">
+                <label>First Name</label>
+                <input type="text" name="firstName" id="firstName" value="<% if (editing) { %><%= employee.firstName %><% } %>">
+            </div>
+            <div class="form-control">
+                <label>Last Name</label>
+                <input type="text" name="lastName" id="lastName" value="<% if (editing) { %><%= employee.lastName %><% } %>">
+            </div>
+            <div class="form-control">
+                <label>email Id</label>
+                <input type="email" name="emailId" id="emailId" value="<% if (editing) { %><%= employee.emailId %><% } %>">
+            </div>
+            <div class="form-control">
+                <label>Phone number</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" value="<% if (editing) { %><%= employee.phoneNumber %><% } %>">
+            </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= employee.id %>" name="empId">
+            <% } %>
+            <button class="btn" type="submit"><% if (editing) { %>Update<% } else { %>Add<% } %></button>
+        </form>
+    </main>
