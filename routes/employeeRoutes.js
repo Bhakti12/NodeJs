@@ -1,17 +1,21 @@
 const express = require('express');
-const employeeController = require('../controllers/employeeController');
+const AddEmployeeController = require('../controllers/AddEmployeeController');
+const getEmployeeController = require('../controllers/getEmployeeController');
+const UpdateEmployeeController = require('../controllers/UpdateEmployeeController');
+const DeleteEmployeeController = require('../controllers/DeleteEmployeeController');
+const userValidation = require('../Validations/userValidation');
 const router = express.Router();
 
-router.get('/', employeeController.getAddEmployee);
+router.get('/', AddEmployeeController.getAddEmployee);
 
-router.get('/employee', employeeController.getEmployee);
+router.get('/employee', getEmployeeController.getEmployee);
 
-router.post('/add-employee', employeeController.postAddEmployee);
+router.post('/add-employee', AddEmployeeController.AddEmployee,userValidation.EmployeeValidation);
 
-router.get('/EditEmployee/:empId', employeeController.getEditEmployee);
+router.get('/EditEmployee/:empId', getEmployeeController.getEmployeeById);
 
-router.post('/EditEmployee', employeeController.postEditEmployee);
+router.post('/EditEmployee', UpdateEmployeeController.UpdateEmployee,userValidation.EmployeeValidation);
 
-router.post('/delete-employee', employeeController.postDeleteEmployee);
+router.post('/delete-employee', DeleteEmployeeController.DeleteEmployeebyId);
 
 module.exports = router;
