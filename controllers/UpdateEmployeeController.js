@@ -1,5 +1,6 @@
 const Employee = require('../models/employee');
 const globalSuceessmessage = require('../util/globalSuccessMesssage');
+const {getEmployeebyId} = require('../services/query');
 
 exports.UpdateEmployee = (req,res,next) => {
     const empId = req.body.empId;
@@ -7,7 +8,7 @@ exports.UpdateEmployee = (req,res,next) => {
     const lastName = req.body.lastName;
     const emailId = req.body.emailId;
     const phoneNumber = req.body.description;
-    Employee.findByPk(empId)
+    getEmployeebyId(empId)
       .then(emp => {
           emp.firstName = firstName;
           emp.lastName = lastName;
@@ -17,11 +18,8 @@ exports.UpdateEmployee = (req,res,next) => {
       })
       .then(result => {
         // console.log('UPDATED');
+        globalSuceessmessage.sendResponse(301,'Employee Updated Sucessfully!!',res);
         res.redirect('employee');
-        res.status(300).send({
-            message: "Employee is updated Successfully!!"
-        })
-        //return globalSuceessmessage.sendResponse(301,'Employee Updated Sucessfully!!',res);
       })
       .catch(err => console.log(err));
 };

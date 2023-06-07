@@ -1,4 +1,4 @@
-exports.sendResponse = (statusCode, message,res) => {
+exports.sendResponse = (statusCode, message, res) => {
     return res.status(statusCode).json({
        error:false,
       message

@@ -1,8 +1,9 @@
 const Employee = require('../models/employee');
 const globalSucessMessage = require('../util/globalSuccessMesssage');
+const {getEmployee} = require('../services/query');
 
 exports.getEmployee = (req,res,next) => {
-    Employee.findAll()
+    getEmployee()
     .then(emp => {
       res.render('employee', {
         emp: emp,
@@ -30,10 +31,9 @@ exports.getEmployeeById = (req,res,next) => {
           editing: editMode,
           employee: emp
         });
-        res.status(200);
-        //return globalSucessMessage.sendResponseGet(302,res);
+        return globalSucessMessage.sendResponseGet(302,res);
       })
       .catch(err => 
-        res.render(err)
-        );
+        console.log(err)
+      );
 };
