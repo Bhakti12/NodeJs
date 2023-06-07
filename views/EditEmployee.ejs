@@ -1,5 +1,6 @@
 <body>
-   <main>
+   <%- include('./header/navigation.ejs') %>
+    <main>
         <form class="form" action="/<% if (editing) { %>EditEmployee<% } else { %>add-employee<% } %>" method="POST">
             <div class="form-control">
                 <label>First Name</label>
