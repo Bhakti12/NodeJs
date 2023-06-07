@@ -1,6 +1,8 @@
 const Employee = require('../models/employee');
 const Message = require('../util/globalSuccessMesssage');
 const {getEmployeebyId} = require('../services/query');
+const { body , validationResult } = require('express-validator');
+const validator = require('validator');
 
 exports.UpdateEmployee = (req,res,next) => {
     const empId = req.body.empId;
@@ -8,6 +10,20 @@ exports.UpdateEmployee = (req,res,next) => {
     const lastName = req.body.lastName;
     const emailId = req.body.emailId;
     const phoneNumber = req.body.description;
+    body('emailId').isEmail().withMessage('Invalid email!').custom(value => {
+      return getEMployee(emailId).then(employee=>{
+        if(employee){
+          return Promise.reject('Email already exists');
+        }
+      });
+    }).normalizeEmail(),
+    body('phoneNumber').matches(/^[1-9][0-9]{9}$/).withMessage('Invalid Format!'),
+    (req,res,next) => {
+      const errors = validationResult(req);
+      if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+      }
+    }
     getEmployeebyId(empId)
       .then(emp => {
           emp.firstName = firstName;

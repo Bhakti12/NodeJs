@@ -15,3 +15,7 @@ exports.getEmployee = () => {
 exports.deleteEmployee = (id) => {
     return Employee.destroy({ where: { id } });
 };
+
+exports.getEMployee = (emailId) => {
+    return Employee.findOne({ where: { emailId } });
+};
