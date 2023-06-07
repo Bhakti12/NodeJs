@@ -16,10 +16,6 @@ exports.AddEmployee = (req,res,next) => {
   const phoneNumber = req.body.phoneNumber;
 
   Employee.findOne({ where: {emailId} })
-  .then((existingEmailId)=>{
-    if(existingEmailId){
-      return res.status(Message.error.alreadyExists.status).json({message : Message.error.alreadyExists.message});
-    }
     AddEmployee(firstName,lastName,emailId,phoneNumber)
     .then(result => {
       // console.log(result);
@@ -29,8 +25,4 @@ exports.AddEmployee = (req,res,next) => {
     .catch(err => {
       console.log(err)
     });
-  }).catch(err => {
-    console.error('Error checking if email id exists');
-    res.status(Message.error.internal.status).json({message: Message.error.internal.message});
-  });
 };

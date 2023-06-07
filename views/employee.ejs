@@ -13,10 +13,7 @@
                                 </h2>
                                 <div class="card__actions">
                                     <a href="/EditEmployee/<%= employee.id %>?edit=true" class="btn">Edit</a>
-                                    <form action="/delete-employee" method="POST">
-                                        <input type="hidden" value="<%= employee.id %>" name="empId">
-                                        <button class="btn" type="submit">Delete</button>
-                                    </form>
+                                    <a href="/delete-employee/<%= employee.id %>?delete">Delete</a>
                                 </div>
                             </article>
                             <% } %>
