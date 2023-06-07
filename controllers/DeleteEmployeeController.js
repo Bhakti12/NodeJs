@@ -1,5 +1,5 @@
 const Employee = require('../models/employee');
-const globalSuccessMesssage = require('../util/globalSuccessMesssage');
+const Message = require('../util/globalSuccessMesssage');
 const {deleteEmployee} = require('../services/query');
 
 exports.DeleteEmployeebyId = (req,res,next) => {
@@ -7,8 +7,7 @@ exports.DeleteEmployeebyId = (req,res,next) => {
     deleteEmployee(empId)
       .then(result => {
         //console.log('DESTROYED');
-        res.redirect('employee');
-        return globalSuccessMesssage.sendResponseDelete(201,'Employee sucessfully deleted',res);
+        res.status(Message.employee.deleted.status).json({message : Message.employee.deleted.message});
       })
       .catch(err => console.log(err));
 };

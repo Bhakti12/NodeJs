@@ -1,5 +1,5 @@
 const Employee = require('../models/employee');
-const globalSucessMessage = require('../util/globalSuccessMesssage');
+const Message = require('../util/globalSuccessMesssage');
 const {getEmployee} = require('../services/query');
 
 exports.getEmployee = (req,res,next) => {
@@ -31,7 +31,7 @@ exports.getEmployeeById = (req,res,next) => {
           editing: editMode,
           employee: emp
         });
-        return globalSucessMessage.sendResponseGet(302,res);
+        return res.status(Message.error.notFound.status).json({message:Message.error.notFound.message});      
       })
       .catch(err => 
         console.log(err)

@@ -1,5 +1,5 @@
 const Employee = require('../models/employee');
-const globalSuceessmessage = require('../util/globalSuccessMesssage');
+const Message = require('../util/globalSuccessMesssage');
 const {getEmployeebyId} = require('../services/query');
 
 exports.UpdateEmployee = (req,res,next) => {
@@ -18,8 +18,7 @@ exports.UpdateEmployee = (req,res,next) => {
       })
       .then(result => {
         // console.log('UPDATED');
-        globalSuceessmessage.sendResponse(301,'Employee Updated Sucessfully!!',res);
-        res.redirect('employee');
+        return res.status(Message.employee.updated.status).json({message:Message.employee.updated.message});
       })
       .catch(err => console.log(err));
 };

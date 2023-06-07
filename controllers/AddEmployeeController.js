@@ -1,5 +1,5 @@
 const Employee = require('../models/employee');
-const globalSucessMessage = require('../util/globalSuccessMesssage');
+const Message = require('../util/globalSuccessMesssage');
 const {AddEmployee} = require('../services/query');
 
 exports.getAddEmployee = (req,res,next) => {
@@ -18,20 +18,19 @@ exports.AddEmployee = (req,res,next) => {
   Employee.findOne({ where: {emailId} })
   .then((existingEmailId)=>{
     if(existingEmailId){
-      return res.status(400).json({message:'Email id is already exists'});
+      return res.status(Message.error.alreadyExists.status).json({message : Message.error.alreadyExists.message});
     }
     AddEmployee(firstName,lastName,emailId,phoneNumber)
     .then(result => {
       // console.log(result);
-    //   console.log('Created');
-    res.redirect('/employee');      
-    return globalSucessMessage.sendResponse(201,'Employee is Added Successfully!!',res);
+    //   console.log('Created');      
+    return res.status(Message.employee.created.status).json({message : Message.employee.created.message});
     })
     .catch(err => {
       console.log(err)
     });
   }).catch(err => {
     console.error('Error checking if email id exists');
-    res.status(500).json({message:'Internal server error'});
+    res.status(Message.error.internal.status).json({message: Message.error.internal.message});
   });
 };
