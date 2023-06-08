@@ -17,10 +17,10 @@ const employee = sequelize.define('employee',{
     lastName:Sequelize.STRING,
     emailId:{
         type:Sequelize.STRING,
-        allowNull:false
-        // unique:{
-        //     message:'Already used'
-        // },
+        allowNull:false,
+        unique:{
+            message:'Already used'
+        }
         // validate:{
         //     isEmailPattern:function(v){
         //         if(!email.test(v)){
@@ -48,6 +48,10 @@ const employee = sequelize.define('employee',{
         //         msg:'phoneNumber not empty'
         //     }
         // }
+    },
+    password:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 });
 

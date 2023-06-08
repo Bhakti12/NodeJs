@@ -1,7 +1,7 @@
 const Employee = require('../models/employee');
 
-exports.AddEmployee = (firstName,lastName,emailId,phoneNumber) => {
-    return Employee.create({firstName,lastName,emailId,phoneNumber});
+exports.AddEmployee = (firstName,lastName,emailId,phoneNumber,password) => {
+    return Employee.create({firstName,lastName,emailId,phoneNumber,password});
 };
 
 exports.getEmployeebyId = (id) => {

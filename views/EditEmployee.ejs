@@ -1,4 +1,11 @@
 <body>
+    <div class="alert alert-danger">
+        <ul>
+            <% errors.forEach(function(error) { %>
+              <li><%= error.msg %></li>
+            <% }); %>
+        </ul>
+    </div>
    <%- include('./header/navigation.ejs') %>
     <main>
         <form class="form" action="/<% if (editing) { %>EditEmployee<% } else { %>add-employee<% } %>" method="POST">
@@ -17,6 +24,10 @@
             <div class="form-control">
                 <label>Phone number</label>
                 <input type="text" name="phoneNumber" id="phoneNumber" value="<% if (editing) { %><%= employee.phoneNumber %><% } %>">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" id="password" value="<% if (editing) { %><%= employee.password %><% } %>">
             </div>
             <% if (editing) { %>
                 <input type="hidden" value="<%= employee.id %>" name="empId">

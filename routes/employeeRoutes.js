@@ -1,15 +1,16 @@
 const express = require('express');
-const AddEmployeeController = require('../controllers/AddEmployeeController');
 const getEmployeeController = require('../controllers/getEmployeeController');
 const UpdateEmployeeController = require('../controllers/UpdateEmployeeController');
 const DeleteEmployeeController = require('../controllers/DeleteEmployeeController');
+const addValidation = require("../Validations/userValidation");
+const addEmployee = require("../controllers/AddEmployeeController");
 const router = express.Router();
 
-router.get('/', AddEmployeeController.getAddEmployee);
+router.get('/', addEmployee.getAddEmployee);
 
 router.get('/employee', getEmployeeController.getEmployee);
 
-router.post('/add-employee', AddEmployeeController.AddEmployee);
+router.post('/add-employee', addValidation.EmployeeValidation,addEmployee.AddEmployee);
 
 router.get('/EditEmployee/:empId', getEmployeeController.getEmployeeById);
 

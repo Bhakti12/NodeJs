@@ -1,7 +1,6 @@
 const express = require('express');
 //const readline = require('readline');
 const sequelize = require('./util/database');
-const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -10,7 +9,8 @@ app.set('views', 'views');
 
 const Emproutes = require('./routes/employeeRoutes');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(Emproutes);
 
