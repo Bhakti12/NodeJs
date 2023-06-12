@@ -1,6 +1,9 @@
 const Message = require('../util/globalSuccessMesssage');
 const { AddEmployee , getEMployee } = require('../services/query');
-const { check , validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+const secretkey = "secretKey";
 
 console.log("coming in this");
 
@@ -56,7 +59,14 @@ exports.AddEmployee = (req,res,next) => {
 
   getEMployee(emailId)
     console.log(firstName,lastName,emailId,phoneNumber,password);
-    AddEmployee(firstName,lastName,emailId,phoneNumber,password)
+    const token = jwt.sign(
+      { emp_id: emailId , password: password},
+      secretkey,{
+        expiresIn : "3000m",
+      }
+    )
+    const emp_token = token;
+    AddEmployee(firstName,lastName,emailId,phoneNumber,password,emp_token)
     .then(result => {      
     return res.status(Message.employee.created.status).json({message : Message.employee.created.message});
     })

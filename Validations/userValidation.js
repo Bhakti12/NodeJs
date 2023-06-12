@@ -4,7 +4,7 @@ exports.EmployeeValidation = async (req, res, next) => {
     const EmpSchema = Joi.object().keys({
         // email : Joi.string().pattern(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/).messages("string.empty":"Email can not be an empty",
         // "string.pattern.base":"Please enter the valid email address","any.required":"Email is required").required()
-      firstName: Joi.string()
+        firstName: Joi.string()
         .messages({
           "any.required": "FirstName is required",
         })

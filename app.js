@@ -1,6 +1,7 @@
 const express = require('express');
 //const readline = require('readline');
 const sequelize = require('./util/database');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -14,6 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(Emproutes);
 
-sequelize.sync().then(console.log('connected successfully!!!')).catch(err=>console.log(err));
+sequelize.sync({force:true}).then(console.log('connected successfully!!!')).catch(err=>console.log(err));
 
 app.listen(3000);

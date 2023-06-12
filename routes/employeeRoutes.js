@@ -4,6 +4,7 @@ const UpdateEmployeeController = require('../controllers/UpdateEmployeeControlle
 const DeleteEmployeeController = require('../controllers/DeleteEmployeeController');
 const addValidation = require("../Validations/userValidation");
 const addEmployee = require("../controllers/AddEmployeeController");
+const AuthController = require('../controllers/AuthController');
 const router = express.Router();
 
 router.get('/', addEmployee.getAddEmployee);
@@ -14,10 +15,12 @@ router.post('/add-employee', addValidation.EmployeeValidation,addEmployee.AddEmp
 
 router.get('/EditEmployee/:empId', getEmployeeController.getEmployeeById);
 
-router.post('/EditEmployee', UpdateEmployeeController.UpdateEmployee);
+router.post('/EditEmployee', addValidation.EmployeeValidation,UpdateEmployeeController.UpdateEmployee);
 
 router.get('/delete-employee/:empId', DeleteEmployeeController.getEmployeeById);
 
 router.post('/delete-employee',DeleteEmployeeController.DeleteEmployeebyId);
+
+router.post('/Login',AuthController.Login);
 
 module.exports = router;

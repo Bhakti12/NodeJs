@@ -1,0 +1,15 @@
+<body>
+    <%- include('./header/navigation.ejs') %>
+     <main>
+         <form class="form" action="/Login" method="POST">
+             <div class="form-control">
+                 <label>UserName</label>
+                 <input type="text" name="userName" id="userName">
+             </div>
+             <div class="form-control">
+                 <label>Password</label>
+                 <input type="password" name="password" id="password">
+             </div>
+             <button class="btn" type="submit">Submit</button>
+         </form>
+ </main>

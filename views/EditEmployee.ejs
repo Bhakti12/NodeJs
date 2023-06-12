@@ -1,11 +1,4 @@
 <body>
-    <div class="alert alert-danger">
-        <ul>
-            <% errors.forEach(function(error) { %>
-              <li><%= error.msg %></li>
-            <% }); %>
-        </ul>
-    </div>
    <%- include('./header/navigation.ejs') %>
     <main>
         <form class="form" action="/<% if (editing) { %>EditEmployee<% } else { %>add-employee<% } %>" method="POST">

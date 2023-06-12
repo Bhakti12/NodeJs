@@ -52,6 +52,10 @@ const employee = sequelize.define('employee',{
     password:{
         type:Sequelize.STRING,
         allowNull:false
+    },
+    token:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 });
 
