@@ -1,21 +1,32 @@
 const Employee = require('../models/employee');
 const jwt = require('jsonwebtoken');
 const config = require('dotenv');
+const bcrypt = require('bcrypt');
+const message = require('../util/globalSuccessMesssage');
 
-exports.Login = (req,res,next) => {
+config.config();
+
+const secretKey = process.env.JWT_SECRET_KEY;
+const tokenKey = process.env.TOKEN_HOLDER_KEY;
+
+exports.Login = async (req,res,next) => {
     try{
-        const { email,password } = req.body;
-        const emp = Employee.findOne({email});
-        const token = req.header(process.env.token_holder_key);
-        if(emp && password===emp.password){
-        const verified = jwt.verify(token,process.env.jwt_Secret_key);
+        const { emailId,password } = req.body;
+        
+        if(!(emailId && password)){
+            res.status(message.error.Empty.status).json({message : message.error.Empty.message});
+        }
+        const emp = await Employee.findOne({emailId});
+        const token = req.header(tokenKey);
+        if(emp && (await bcrypt.compare(password,emp.password))){
+        const verified = jwt.verify(token,secretKey);
         if(verified){
             res.status(200).json({message:'Login successfully!!',
             isAuthenticated : true});
             //isAuthenticated = true;
         }
         else{
-            res.status(402).json({message : 'incorrect credentials'});
+            res.status(402).json({message : 'incorrect credentials!!'});
         }
         }
         else{

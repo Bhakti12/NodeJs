@@ -1,16 +1,30 @@
 const Employee = require('../models/employee');
 const Message = require('../util/globalSuccessMesssage');
+const paginate = require('sequelize-paginate');
 const {getEmployee} = require('../services/query');
+const { Op } = require('sequelize');
 
 exports.getEmployee = (req,res,next) => {
-    getEmployee()
-    .then(emp => {
-      res.render('employee', {
-        emp: emp,
-        path: 'employee'
-      });
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+
+  try{
+    const offset = (page - 1) * limit;
+    const employees = Employee.findAndCountAll({
+      offset,
+      limit
     })
-    .catch(err => console.log(err));
+    getEmployee().then(
+      emp =>{
+        res.render('employee',{
+          emp: emp,
+          path: 'employee'
+        });
+      })
+  }
+  catch(err){
+    console.log(err);
+  }
 };
 
 exports.getEmployeeById = (req,res,next) => {

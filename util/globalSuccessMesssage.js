@@ -11,7 +11,7 @@ module.exports = {
     deleted:{
       status: 302,
       message: 'Employee deleted successfully!'
-    }
+    },
   },
   error:{
     alreadyExists:{
@@ -37,6 +37,10 @@ module.exports = {
     notDeleted:{
       status: 403,
       message: 'can`t delete employee'
+    },
+    Empty:{
+      status: 503,
+      message: 'can`t be empty'
     }
   }
 }
