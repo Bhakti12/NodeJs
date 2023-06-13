@@ -9,8 +9,14 @@
                 <a class="<%= path === '/employee' ? 'active' : '' %>" href="/employee">Employees</a>
             </li>
             <li class="main-header__item">
-                <a class="<%= path === '/Login' ? 'active' : '' %>" href="/views/Login.ejs">Login</a>
+                <a class="<%= path === '/Login' ? 'active' : '' %>" href="/Login">Login</a>
             </li>
+            <%= if{ %>
+                <%= (isAuthenticated) %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/Logout' ? 'active' : '' %>" href="/Logout">Logout</a>
+                </li> 
+            <%= } %>   
         </ul>
     </nav>
 </header>

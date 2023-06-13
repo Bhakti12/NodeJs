@@ -23,4 +23,6 @@ router.post('/delete-employee',DeleteEmployeeController.DeleteEmployeebyId);
 
 router.post('/Login',AuthController.Login);
 
+router.post('/Logout',AuthController.Logout);
+
 module.exports = router;

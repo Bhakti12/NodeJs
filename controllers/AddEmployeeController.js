@@ -2,8 +2,7 @@ const Message = require('../util/globalSuccessMesssage');
 const { AddEmployee , getEMployee } = require('../services/query');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
-const secretkey = "secretKey";
+const config = require('dotenv');
 
 console.log("coming in this");
 
@@ -61,7 +60,7 @@ exports.AddEmployee = (req,res,next) => {
     console.log(firstName,lastName,emailId,phoneNumber,password);
     const token = jwt.sign(
       { emp_id: emailId , password: password},
-      secretkey,{
+      process.env.jwt_Secret_key,{
         expiresIn : "3000m",
       }
     )
